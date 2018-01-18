@@ -1,0 +1,35 @@
+void sale::modifysalesid()
+{
+int found=0,recordsize;
+char n[6];
+fstream fout;
+fout.open("sales.dbf",ios::in||ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+return;
+
+}
+cout<<"\n enter product id to modify record";
+cin>>n;
+recordsize=sizeof(sale);
+while(fout.read((char *)this,sizeof(sale)))
+{
+if(strcmp(n,sid)==0)
+{
+  cout<<"\n enter product id,product name,product company,product dealer:";
+  cin>>sid>>sname>>scompany>>sdealer;
+  fout.seekg(-recordsize,ios::cur);
+  fout.write((char *)this,sizeof(sale));
+  found=1;
+  break;
+}
+}
+fout.close();
+if(found==1)
+cout<<"\n record modified";
+else
+cout<<"\n record not modified";
+}
+
+

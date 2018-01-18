@@ -1,0 +1,44 @@
+void customer::deletecustomername()
+{
+int found=0;
+char n[21];
+ifstream fin;
+fin.open("customers.dbf",ios::in||ios::binary);
+if(fin.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+ofstream fout;
+fout.open("temp.dbf",ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+cout<<"\n enter customer name to delete record";
+cin>>n;
+while(fin.read((char *)this,sizeof(customer)))
+{
+if(strcmp(n,cname)!=0)
+{
+fout.write((char *)this,sizeof(customer));
+}
+else
+{
+found=1;
+}
+}
+fout.close();
+fin.close();
+remove("customers.dbf");
+rename("temp.dbf","customers.dbf");
+if(found==1)
+{
+ cout<<"\n\n\nrecord deleted";
+}
+else
+{
+cout<<"\n record not found";
+}
+}

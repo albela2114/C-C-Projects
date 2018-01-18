@@ -1,0 +1,301 @@
+
+class purchase
+{
+	private :
+	  char pid[6],pname[15],pcompany[20],pdealer[15];
+	  int pcost,pquantity,pdiscount,pvat,pwarranty;
+	  struct date d;
+	 public:
+		void addpurchase();
+		void billpurchase(int,int,int);
+		void searchmenu();
+		void searchpurchaseid();
+		void searchpurchasecompany();
+		void searchpurchasename();
+		void searchpurchasedealer();
+		void modifypurchasemenu();
+		void modifypurchaseid();
+		void deletepurchasemenu();
+		void deletepurchaseid();
+};
+
+void purchase::addpurchase()
+{
+  clrscr();
+	char ans;
+	ofstream fout;
+	fout.open("purchase.dbf",ios::app||ios::binary);
+	if(fout.fail())
+	{
+		cout<<"\nFile unable to  open";
+		getch();
+		clrscr();
+		return;
+	 }
+
+	 do
+	 {
+	  gotoxy(5,4);
+		CP("Date :");
+		gotoxy(12,4);
+		getdate(&d);
+		CP("%d-%d-%d",d.da_day,d.da_mon,d.da_year);
+
+		gotoxy(5,5);
+		CP("Product Id :");
+		gotoxy(40,5);
+		CP("Product Name :");
+			gotoxy(5,6);
+		CP("Product Company:");
+		gotoxy(40,6);
+		CP("Product Cost:");
+		gotoxy(5,7);
+		CP("Dealer Name:");
+		gotoxy(40,7);
+		CP("Quantity:");
+		gotoxy(5,8);
+		CP("Discount:");
+		gotoxy(40,8);
+		CP("Vat:");
+		gotoxy(5,9);
+		CP("Warranty In Months:");
+
+
+		gotoxy(17,5);
+		cin>>pid;
+		gotoxy(54,5);
+		cin>>pname;
+		gotoxy(21,6);
+		cin>>pcompany;
+		gotoxy(53,6);
+		cin>>pcost;
+		gotoxy(17,7);
+		cin>>pdealer;
+		gotoxy(50,7);
+		cin>>pquantity;
+
+		gotoxy(15,8);
+		cin>>pdiscount;
+		gotoxy(44,8);
+		cin>>pvat;
+		gotoxy(26,9);
+		cin>>pwarranty;
+		billpurchase(pcost,pdiscount,pquantity);
+		getdate(&d);
+
+
+		fout.write( (char *)this,sizeof(purchase));
+		cout<<"\n\n\n Want to add more records [y/n] :";
+		cin>>ans;
+  }while(ans=='y' || ans=='Y');
+  clrscr();
+ fout.close();
+ clrscr();
+}
+void purchase::billpurchase(int cost,int discount,int quantity)
+{
+int bill;
+int ecost;
+ecost=(cost-(cost*discount/100));
+gotoxy(25,25);
+cout<<"\n cost after discount ="<<ecost;
+gotoxy(40,9);
+CP("Bill:");
+gotoxy(45,9);
+bill=(cost)*quantity;
+cout<<bill;
+}
+void purchase::searchmenu()
+{
+  clrscr();
+  char i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Search Purchase Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	searchpurchaseid();
+  break;
+  case 2:
+	clrscr();
+	searchpurchasename();
+  break;
+  case 3:
+	clrscr();
+	searchpurchasecompany();
+  break;
+  case 4:
+	clrscr();
+	searchpurchasedealer();
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+  fflush(stdin);
+
+  }while(i==1);
+  cout<<"invalid choice";
+  getch();
+
+
+}
+void purchase::modifypurchasemenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Modify Purchase Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	modifypurchaseid();
+  break;
+  case 2:
+	clrscr();
+
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}
+void purchase::deletepurchasemenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Delete Purchase Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	deletepurchaseid();
+  break;
+  case 2:
+	clrscr();
+
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}

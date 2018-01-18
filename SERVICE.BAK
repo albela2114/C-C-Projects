@@ -1,0 +1,257 @@
+class service
+{
+	private :
+	  char seid[6],sename[15];
+	  struct date d;
+	 public:
+		void addservice();
+		void searchservicemenu();
+
+		void searchservicename();
+		void searchserviceid();
+		void deleteservicemenu();
+		void deleteserviceid();
+		void deleteservicename();
+		void modifyservicemenu();
+		void modifyserviceid();
+		void modifyservicename();
+
+
+};
+
+void service::addservice()
+{
+  clrscr();
+	char ans;
+	ofstream fout;
+	fout.open("service.dbf",ios::app||ios::binary);
+	if(fout.fail())
+	{
+		cout<<"\nFile unable to  open";
+		getch();
+		clrscr();
+		return;
+	 }
+
+	 do
+	 {
+	  gotoxy(5,4);
+		CP("Date :");
+		gotoxy(12,4);
+		getdate(&d);
+		CP("%d-%d-%d",d.da_day,d.da_mon,d.da_year);
+
+		gotoxy(5,5);
+		CP("Product Id :");
+		gotoxy(40,5);
+		CP("Product Name :");
+		gotoxy(5,7);
+		gotoxy(17,5);
+		cin>>seid;
+		gotoxy(54,5);
+		cin>>sename;
+		getdate(&d);
+
+
+		fout.write( (char *)this,sizeof(service));
+		cout<<"\n\n\n Want to add more records [y/n] :";
+		cin>>ans;
+  }while(ans=='y' || ans=='Y');
+  clrscr();
+ fout.close();
+ clrscr();
+}
+void service::searchservicemenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Search Service Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	searchserviceid();
+
+  break;
+  case 2:
+	clrscr();
+	searchservicename();
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}
+void service::deleteservicemenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Delete service Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	deleteserviceid();
+  break;
+  case 2:
+	clrscr();
+
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}
+void service::modifyservicemenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Modify service Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	modifyserviceid();
+  break;
+  case 2:
+	clrscr();
+	modifyservicename();
+
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}

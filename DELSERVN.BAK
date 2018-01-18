@@ -1,0 +1,40 @@
+void service::deleteservicename()
+{
+int found=0;
+char n[6];
+ifstream fin;
+fin.open("service.dbf",ios::in||ios::binary);
+if(fin.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+ofstream fout;
+fout.open("temp.dbf",ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+cout<<"\n enter id to delete record";
+cin>>n;
+while(fin.read((char *)this,sizeof(service)))
+{
+if(strcmp(n,sename)!=0)
+{
+fout.write((char *)this,sizeof(service));
+}
+else
+{
+found=1;
+}
+}
+fout.close();
+fin.close();
+remove("service.dbf");
+rename("temp.dbf","service.dbf");
+if(found==1)
+cout<<"\n record deleted";
+else
+cout<<"\n record not found";
+}

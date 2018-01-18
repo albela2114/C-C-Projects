@@ -1,0 +1,33 @@
+void service::modifyserviceid()
+{
+int found=0,recordsize;
+char n[6];
+fstream fout;
+fout.open("service.dbf",ios::in||ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+return;
+
+}
+cout<<"\n enter product id to modify record";
+cin>>n;
+recordsize=sizeof(service);
+while(fout.read((char *)this,sizeof(service)))
+{
+if(strcmp(n,seid)==0)
+{
+  cout<<"\n enter product id,product name";
+  cin>>seid>>sename;
+  fout.seekg(-recordsize,ios::cur);
+  fout.write((char *)this,sizeof(service));
+  found=1;
+  break;
+}
+}
+fout.close();
+if(found==1)
+cout<<"\n record modified";
+else
+cout<<"\n record not modified";
+}

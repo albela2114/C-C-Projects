@@ -1,0 +1,50 @@
+/*class purchase
+{
+char name[20];
+int rno,;
+public:
+ void deleterecord();
+ };
+ void purchase::deleterecord()
+ {
+ int n;
+ ifstream fin;
+ fin.open("purchase.dbf",ios::in||ios::binary);
+if(!fin)
+{
+cerr<<"\n file unable to oipen";
+exit(1);
+}
+ofstream fout;
+fout.open("temp.dbf",ios::out||ios::binary);
+if(!fout)
+{
+cerr<<"\n file unable to create";
+exit(1);
+}
+cout<<"\n enter pid to delete record";
+cin>>n;
+while(fin.read((char *)this,size of (purchase))){
+if(n!=pid)
+{
+fwrite((char *)this,size of (purchase)));
+}
+else
+{
+found=1;
+}
+}
+fout.close();
+fin.close();
+remove("purchase.dbf");
+rename("temp.dbf","purchase.dbf");
+if(found==1)
+{
+cout<<"\n record is deleted";
+}
+else
+cout<<"\n record not found for deletion";
+}
+
+
+

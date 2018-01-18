@@ -1,0 +1,31 @@
+void customer :: searchcustomername()
+{
+ int found=0;
+ char custname[15];
+ ifstream fin;
+ fin.open("customer.dbf",ios:: in|| ios::binary);
+ if(fin.fail())
+ {
+  cout<<"\n file unable to open";
+  exit(1);
+ }
+ cout.setf(ios :: left,ios :: adjustfield);
+ cout.precision(2);
+ cout<<"\n enter customer name to search in record ";
+ cin>>custname;
+ while(fin.read((char *)this, sizeof(customer)))
+ {
+  if(strcmp(custname,cname)==0)
+  {
+	cout<<"\n ";
+	cout<<cid<<endl<<cname;
+	found=1;
+	break;
+	}
+  }
+
+  if (found==0)
+	cout<<"\n Record not found";
+}
+
+

@@ -1,0 +1,40 @@
+void purchase::deletepurchaseid()
+{
+int found=0;
+char n[6];
+ifstream fin;
+fin.open("purchase.dbf",ios::in||ios::binary);
+if(fin.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+ofstream fout;
+fout.open("temp.dbf",ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+cout<<"\n enter id to delete record";
+cin>>n;
+while(fin.read((char *)this,sizeof(purchase)))
+{
+if(n!=pid)
+{
+fout.write((char *)this,sizeof(purchase));
+}
+else
+{
+found=1;
+}
+}
+fout.close();
+fin.close();
+remove("purchase.dbf");
+rename("temp.dbf","purchase.dbf");
+if(found==1)
+cout<<"\n record deleted";
+else
+cout<<"\n record not found";
+}

@@ -1,0 +1,32 @@
+void customer::modifycustomerid()
+{
+int found=0,recordsize;
+char n[6];
+fstream fout;
+fout.open("customers.dbf",ios::in||ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+cout<<"\n enter product id to modify record";
+cin>>n;
+recordsize=sizeof(customer);
+while(fout.read((char *)this,sizeof(customer)))
+{
+if(strcmp(n,cid)==0)
+{
+  cout<<"\n enter customer id,\ncustomer name";
+  cin>>cid>>cname;
+  fout.seekg(-recordsize,ios::cur);
+  fout.write((char *)this,sizeof(customer));
+  found=1;
+  break;
+}
+}
+fout.close();
+if(found==1)
+cout<<"\n record modified";
+else
+cout<<"\n record not modified";
+}

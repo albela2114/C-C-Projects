@@ -1,0 +1,32 @@
+void purchase::modifypurchaseid()
+{
+int found=0,recordsize;
+char n[6];
+fstream fout;
+fout.open("purchase.dbf",ios::in||ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+return;
+}
+cout<<"\n enter product id to modify record";
+cin>>n;
+recordsize=sizeof(purchase);
+while(fout.read((char *)this,sizeof(purchase)))
+{
+if(strcmp(n,pid)==0)
+{
+  cout<<"\n enter product id,product name,product company,product dealer,cost,quantity,warranty:";
+  cin>>pid>>pname>>pcompany>>pdealer>>pcost>>pquantity>>pwarranty;
+  fout.seekg(-recordsize,ios::cur);
+  fout.write((char *)this,sizeof(purchase));
+  found=1;
+  break;
+}
+}
+fout.close();
+if(found==1)
+cout<<"\n record modified";
+else
+cout<<"\n record not modified";
+}

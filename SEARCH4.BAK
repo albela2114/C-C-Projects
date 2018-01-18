@@ -1,0 +1,32 @@
+void purchase :: searchpurchasedealer()
+{
+ int found=0;
+ char prodealer[15];
+ ifstream fin;
+ fin.open("purchase.dbf",ios:: in|| ios::binary);
+ if(fin.fail())
+ {
+  cout<<"\n file unable to open";
+  exit(1);
+ }
+ cout.setf(ios :: left,ios :: adjustfield);
+ cout.precision(2);
+ cout<<"\n enter product dealer to search in record ";
+ cin>>prodealer;
+ while(fin.read((char *)this, sizeof(purchase)))
+ {
+  if(strcmp(prodealer,pdealer)==0)
+  {
+	cout<<"\n ";
+	cout<<pid<<endl<<pname<<endl<<pdealer<<endl<<pquantity<<endl<<pcost<<endl;
+	cout<<pvat<<endl<<pwarranty<<endl;
+	found=1;
+	break;
+	}
+  }
+
+  if (found==0)
+	cout<<"\n Record not found";
+}
+
+

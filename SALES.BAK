@@ -1,0 +1,263 @@
+class sale
+{
+	private :
+	  char sid[6],sname[15],scompany[15],sdealer[15];
+	  struct date d;
+	 public:
+		void addsale();
+		void searchsalesmenu();
+		void searchsalesid();
+		void searchsalesname();
+		void searchsalescompany();
+		void searchsalesdealer();
+		void deletesalesmenu();
+		void deletesalesid();
+		void deletesalesname();
+		void modifysalesmenu();
+		void modifysalesid();
+		void modifysalesname();
+};
+void sale::addsale()
+{
+  clrscr();
+	char ans;
+	ofstream fout;
+	fout.open("sales.dbf",ios::app||ios::binary);
+	if(fout.fail())
+	{
+		cout<<"\nFile unable to  open";
+		getch();
+		clrscr();
+		return;
+	 }
+
+	 do
+	 {
+	  gotoxy(5,4);
+		CP("Date :");
+		gotoxy(12,4);
+		getdate(&d);
+		CP("%d-%d-%d",d.da_day,d.da_mon,d.da_year);
+
+		gotoxy(5,5);
+		CP("Product Id :");
+		gotoxy(40,5);
+		CP("Product Name :");
+		gotoxy(5,6);
+		CP("product Company :");
+		gotoxy(40,6);
+		CP("Product Dealer :");
+		gotoxy(17,5);
+		cin>>sid;
+		gotoxy(54,5);
+		cin>>sname;
+		gotoxy(21,6);
+		cin>>scompany;
+		gotoxy(56,6);
+		cin>>sdealer;
+		getdate(&d);
+
+
+
+		fout.write( (char *)this,sizeof(sale));
+		cout<<"\n\n\n Want to add more records [y/n] :";
+		cin>>ans;
+  }while(ans=='y' || ans=='Y');
+  clrscr();
+ fout.close();
+ clrscr();
+}
+void sale::searchsalesmenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Search Sales Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	searchsalesid();
+  break;
+  case 2:
+	clrscr();
+	searchsalesname();
+  break;
+  case 3:
+	clrscr();
+	searchsalescompany();
+  break;
+  case 4:
+	clrscr();
+	searchsalesdealer();
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}
+void sale::deletesalesmenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Delete sales Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	deletesalesid();
+  break;
+  case 2:
+	clrscr();
+	deletesalesname();
+
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}
+void sale::modifysalesmenu()
+{
+  clrscr();
+  int i;
+  do
+  {
+	clrscr();
+	gotoxy(35,7);
+	textcolor(10);
+	CP("Modify sales Menu");
+	gotoxy(30,9);
+	textcolor(2);
+	CP("1.Product Id:");
+	gotoxy(30,11);
+	textcolor(5);
+
+	CP("2.Product Name:");
+	gotoxy(30,13);
+	textcolor(9);
+	CP("3.Product Company:");
+	gotoxy(30,15);
+	textcolor(7);
+	CP("4.Product Dealer:");
+	gotoxy(30,17);
+	textcolor(4);
+	CP("5.Exit");
+	int ch;
+	gotoxy(30,19);
+	CP("Enter Choice:");
+	gotoxy(44,19);
+	cin>>ch;
+
+  switch(ch)
+  {
+  case 1:
+	clrscr();
+	modifysalesid();
+  break;
+  case 2:
+	clrscr();
+	modifysalesname();
+
+  break;
+  case 3:
+	clrscr();
+
+  break;
+  case 4:
+	clrscr();
+
+  break;
+  case 5:
+
+  clrscr();
+  return;
+  };
+  gotoxy(25,32);
+  cout<<"Wanna Continue?? Press 1 :";
+  cin>>i;
+
+  }
+
+
+  while(i==1);
+}

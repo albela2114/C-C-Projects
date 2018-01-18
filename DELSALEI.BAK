@@ -1,0 +1,41 @@
+void sale::deletesalesid()
+{
+int found=0;
+char n[6];
+ifstream fin;
+fin.open("sales.dbf",ios::in||ios::binary);
+if(fin.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+ofstream fout;
+fout.open("temp.dbf",ios::out||ios::binary);
+if(fout.fail())
+{
+cout<<"\n file unable to open";
+exit(1);
+}
+cout<<"\n enter id to delete record";
+cin>>n;
+while(fin.read((char *)this,sizeof(sale)))
+{
+if(strcmp(n,sid)!=0)
+{
+fout.write((char *)this,sizeof(sale));
+}
+else
+{
+found=1;
+}
+}
+fout.close();
+fin.close();
+remove("sales.dbf");
+rename("temp.dbf","sales.dbf");
+if(found==1)
+cout<<"\n record deleted";
+else
+cout<<"\n record not found";
+
+}
